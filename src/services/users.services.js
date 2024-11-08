@@ -1,5 +1,5 @@
 import UsersFactory from "../models/users.factory.js";
-import server from "./server.js";
+import server from "../server.js";
 import { validateUser } from "./validate/schema.js";
 
 class UsersServices {
