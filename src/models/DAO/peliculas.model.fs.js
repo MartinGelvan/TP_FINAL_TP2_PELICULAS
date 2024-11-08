@@ -11,9 +11,9 @@ class PeliculasModelFs {
             try {
                 const data = await fs.promises.readFile("peliculas.json", 'utf8'); 
                 this.peliculas = JSON.parse(data); 
-                console.log("Usuarios cargados:", this.peliculas); 
+                console.log("Peliculas cargadas:", this.peliculas); 
             } catch (error) {
-                console.error("Error al cargar usuarios:", error);
+                console.error("Error al cargar peliculas:", error);
                 this.peliculas = []; 
             }
         } else {
