@@ -8,11 +8,11 @@ class UsersRoute {
     }
 
     start(){
-        this.routerUsers.get("/users",this.userController.getUsers)
-        this.routerUsers.post("/users",this.userController.registerUser)
-        this.routerUsers.put("/users/updateAll/:id",this.userController.updateAllUser)
-        this.routerUsers.patch("/users/updateSomething/:id",this.userController.updateSomethingUser)
-        this.routerUsers.delete("/users/delete/:id",this.userController.deleteUser)
+        this.routerUsers.get("/",this.userController.getUsers)
+        this.routerUsers.post("/",this.userController.registerUser)
+        this.routerUsers.put("/updateAll/:id",this.userController.updateAllUser)
+        this.routerUsers.patch("/updateSomething/:id",this.userController.updateSomethingUser)
+        this.routerUsers.delete("/delete/:id",this.userController.deleteUser)
 
         return this.routerUsers
     }

@@ -1,24 +1,3 @@
-/*
-import { MongoClient } from "mongodb";
-import config from "../server.js";
-
-
-class MongoConnection{
-   
-
-    static client = new MongoClient(config.STRC)
-    static db = this.client.db(config.NAMEBASE)
-
-    static connect=async () => {
-        await this.client.connect()
-    }
-
-}
-
-export default MongoConnection
-
-*/
-
 import { MongoClient } from "mongodb";
 import config from "../server.js";
 

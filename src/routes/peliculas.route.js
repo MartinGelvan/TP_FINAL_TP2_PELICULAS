@@ -8,11 +8,11 @@ class PeliculasRoute {
     }
 
     start(){
-        this.routerPeliculas.get("/peliculas",this.peliculasController.getPeliculas)
-        this.routerPeliculas.post("/peliculas",this.peliculasController.registerPeliculas)
-        this.routerPeliculas.put("/peliculas/updateAll/:id",this.peliculasController.updateAllPeliculas)
-        this.routerPeliculas.patch("/peliculas/updateSomething/:id",this.peliculasController.updateSomethingPeliculas)
-        this.routerPeliculas.delete("/peliculas/delete/:id",this.peliculasController.deletePeliculas)
+        this.routerPeliculas.get("/",this.peliculasController.getPeliculas)
+        this.routerPeliculas.post("/",this.peliculasController.registerPeliculas)
+        this.routerPeliculas.put("/updateAll/:id",this.peliculasController.updateAllPeliculas)
+        this.routerPeliculas.patch("/updateSomething/:id",this.peliculasController.updateSomethingPeliculas)
+        this.routerPeliculas.delete("/delete/:id",this.peliculasController.deletePeliculas)
 
         return this.routerPeliculas
     }

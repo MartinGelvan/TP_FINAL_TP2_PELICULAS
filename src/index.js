@@ -11,8 +11,8 @@ const PORT = 8080
 app.use(express.urlencoded({extended: true}))
 app.use(express.json())
 
-app.use("/",new UsersRoute().start())
-app.use("/",new PeliculasRoute().start())
+app.use("/users",new UsersRoute().start())
+app.use("/peliculas",new PeliculasRoute().start())
 
 
 app.on("ERROR",(error)=>console.log("Error: ",error))
