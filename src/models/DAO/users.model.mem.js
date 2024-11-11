@@ -1,4 +1,4 @@
-import nodemailer from "nodemailer"
+import sendEmail from "../../utils/emailer.js"
 
 class UsersModelMem {
     constructor() {
@@ -20,26 +20,6 @@ class UsersModelMem {
         sendEmail(data.mail)
         return await data
     }
-
-    sendEMail = async (mail) => {
-        const transporter = nodemailer.createTransport({
-            service: 'Gmail',
-            auth: {
-                user: 'tp2trabajopractico@gmail.com',
-                pass: 'vnmo xyrq ynaj shod'
-            }
-        });
-        const mailOptions = {
-            from: 'tp2trabajopractico@gmail.com',
-            to: mail,
-            subject: 'Registración exitosa',
-            text: "Usted se ha registrado exitosamente"
-        };
-        transporter.sendMail(mailOptions);
-        console.log('Email sent: ' + info.response);
-        res.send('Email sent successfully');
-    };
-
 
     updateAllUser = async (id,data) => {
         
