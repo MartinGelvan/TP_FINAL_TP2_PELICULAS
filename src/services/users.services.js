@@ -14,11 +14,9 @@ class UsersServices {
 
   registerUser = async (data) => {
     if (!validateUser(data)) {
-      const response = await this.usersFactory.registerUser(data);
-      console.log(response)
-      const envio = sendEmail()
-        console.log(envio)
-      return "ok"
+      await sendEmail(data.mail)
+      const response = await this.usersFactory.registerUser(data);     
+      console.log(response)   
     }else{
       throw new Error("No se ha podido registrar")
     }

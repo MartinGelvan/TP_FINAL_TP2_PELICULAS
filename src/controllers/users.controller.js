@@ -1,4 +1,6 @@
 import UsersServices from "../services/users.services.js";
+import sendEmail from "../utils/emailer.js"
+
 
 class UsersController {
     constructor() {
@@ -20,7 +22,6 @@ class UsersController {
         res.status(400).json({ message: error.message });
     }
 }
-
 
   updateAllUser = async (req,res) => {
     const {id} = req.params
