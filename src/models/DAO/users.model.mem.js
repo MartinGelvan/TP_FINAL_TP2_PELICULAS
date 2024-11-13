@@ -1,4 +1,3 @@
-import sendEmail from "../../utils/emailer.js"
 
 class UsersModelMem {
     constructor() {
@@ -17,7 +16,6 @@ class UsersModelMem {
         const idNuevo = this.users[this.users.length - 1].id + 1
         data.id = idNuevo
         this.users.push(data)
-        sendEmail(data.mail)
         return await data
     }
 

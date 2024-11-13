@@ -1,23 +1,24 @@
 import nodemailer from "nodemailer"
 
-const sendEMail = async (mail) => {
+const sendEMail = async () => {
     try{
         const transporter = nodemailer.createTransport({
             host: 'smtp.gmail.com',
             port: 587,
+            secure: false,
             auth: {
                 user: 'tp2trabajopractico@gmail.com',
-                pass: 'vnmo xyrq ynaj shod'
+                pass: 'gdft dcbc cncm kurw'
             }
         });
         const mailOptions = {
             from: 'tp2trabajopractico@gmail.com',
-            to: mail,
+            to: 'aleben5188@gmail.com',
             subject: 'Registración exitosa',
             text: "Usted se ha registrado exitosamente"
         };
-        transporter.sendMail(mailOptions);
-        console.log('Email sent: ' + info.response);
+        const tr = await transporter.sendMail(mailOptions);
+        console.log("transporter: ", tr)
         res.send('Email sent successfully');
     } catch (error) {
         console.error('Error sending email:', error);
