@@ -7,6 +7,7 @@ class PeliculasServices {
     this.peliculasFactory = PeliculasFactory.get(server.PERSISTENCE);
   }
 
+  // obtener películas desde la API y mapear solo los campos necesarios
   getPeliculas = async () => {
     if (server.PERSISTENCE !== "DB") {
       return await this.peliculasFactory.getPeliculas();
@@ -14,7 +15,7 @@ class PeliculasServices {
 
     try {
       const page = 1; 
-      const language = 'es';
+      const language = 'en';
       const apiKey = process.env.TMDB_API_KEY;
 
       const response = await axios.get('https://api.themoviedb.org/3/movie/popular', {
@@ -25,15 +26,46 @@ class PeliculasServices {
         }
       });
 
-      return response.data.results;  
+      // Mapeo de los campos
+      const peliculas = response.data.results.map(pelicula => ({
+        id: pelicula.id,
+        title: pelicula.title,
+        description: pelicula.overview || 'Descripción no disponible', // Verificar existencia de descripción
+        release_date: new Date(pelicula.release_date),
+        createdAt: new Date(),
+      }));
+
+      return peliculas;  
     } catch (error) {
       console.error('Error al obtener las películas desde TMDb:', error);
       throw new Error('Error al obtener las películas desde TMDb');
     }
   };
 
-  registerPeliculas = async (data) => {
-    return await this.peliculasFactory.registerPeliculas(data);
+  guardarPeliculasAPIEnBD = async (peliculas) => {
+    let todasRegistradas = true; 
+    for (const pelicula of peliculas) {
+      const existe = await this.peliculasFactory.getPeliculas({ id: pelicula.id });
+      if (!existe || existe.length === 0) {
+        await this.peliculasFactory.registerPeliculas({
+          id: pelicula.id,
+          title: pelicula.title,
+          description: pelicula.description,
+          release_date: pelicula.release_date,
+          createdAt: pelicula.createdAt,
+        });
+        console.log("Película guardada en la base de datos:", pelicula)
+        todasRegistradas = false;
+      }
+    }
+    if (todasRegistradas){
+      console.log('Todas las películas ya están registradas en la base de datos.')
+    }
+  };
+
+  registerPeliculas = async () => {
+    const peliculas = await this.getPeliculas();
+    await this.guardarPeliculasAPIEnBD(peliculas);
   };
 
   updateAllPeliculas = async (id, data) => {
