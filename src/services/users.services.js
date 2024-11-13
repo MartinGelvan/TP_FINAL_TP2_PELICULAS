@@ -1,6 +1,7 @@
 import UsersFactory from "../models/users.factory.js";
 import server from "../server.js";
 import { validateUser } from "./validate/schema.js";
+import sendEmail from "../utils/emailer.js"
 
 class UsersServices {
   constructor() {
@@ -13,7 +14,8 @@ class UsersServices {
 
   registerUser = async (data) => {
     if (!validateUser(data)) {
-      return await this.usersFactory.registerUser(data);
+      await sendEmail(data.mail)
+      return await this.usersFactory.registerUser(data);       
     }else{
       throw new Error("No se ha podido registrar")
     }
