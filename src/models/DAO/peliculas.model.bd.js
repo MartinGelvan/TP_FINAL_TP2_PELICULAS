@@ -5,15 +5,12 @@ class PeliculasMongoModel{
     constructor(){ 
     }
 
-    getPeliculas= async () => {
-        const peliculas = await MongoConnection.db.collection("peliculas").find({}).toArray()
+    getPeliculas= async (filter={}) => {
+        const peliculas = await MongoConnection.db.collection("peliculas").find(filter).toArray()
         return peliculas
     }
     
-    postPeliculas = async (data) => {
-        const newPelicula = await MongoConnection.db.collection("peliculas").insertOne(data)
-        return { ...data, _id: newPelicula.insertedId };
-    }
+    
     registerPeliculas = async (data) => {
         const newPelicula = await MongoConnection.db.collection("peliculas").insertOne(data);
         return { ...data, _id: newPelicula.insertedId }; 

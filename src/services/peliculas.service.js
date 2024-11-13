@@ -24,13 +24,32 @@ class PeliculasServices {
           language: language 
         }
       });
+      const peliculas=response.data.results;
+      await this.guardarPeliculasAPIEnBD(peliculas)
 
-      return response.data.results;  
+      const peliculasDB=await this.peliculasFactory.getPeliculas();
+      
+
+
+      return peliculasDB;  
     } catch (error) {
       console.error('Error al obtener las películas desde TMDb:', error);
       throw new Error('Error al obtener las películas desde TMDb');
     }
   };
+
+  guardarPeliculasAPIEnBD=async(peliculas)=>{
+
+    for(const pelicula of peliculas){
+
+      const existe=await this.peliculasFactory.getPeliculas({id:pelicula.id})
+
+      if(!existe || existe.length===0){
+        await this.peliculasFactory.registerPeliculas(pelicula)
+      }
+    }
+  }
+
 
   registerPeliculas = async (data) => {
     return await this.peliculasFactory.registerPeliculas(data);

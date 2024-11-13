@@ -15,7 +15,7 @@ class UserMongoModel{
         return { ...data, _id: newUser.insertedId };
     }
     registerUser = async (data) => {
-        const newUser = await MongoConnection.db.collection("users").insertOne(data);
+        const newUser = await MongoConnection.db.collection("users").insertMany(data);
         return { ...data, _id: newUser.insertedId }; 
     }
     deleteUser = async (id) => {
