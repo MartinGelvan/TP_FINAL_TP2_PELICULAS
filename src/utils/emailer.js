@@ -18,7 +18,7 @@ const sendEMail = async (data) => {
             text: "Usted se ha registrado exitosamente"
         };
         const tr = await transporter.sendMail(mailOptions);
-        console.log("transporter: ", tr)
+        //console.log("transporter: ", tr)
     } catch (error) {
         console.error('Error sending email:', error);
         res.status(500).send('Error: Something went wrong. Please try again.');
