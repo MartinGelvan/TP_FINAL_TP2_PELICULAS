@@ -5,12 +5,14 @@ const PORT = process.env.PORT;
 const STRC = process.env.STRC;
 const NAMEBASE = process.env.NAMEBASE;
 const PERSISTENCE = process.env.PERSISTENCE;
+const ROLE = process.env.ROLE
 
 export default {
   PORT,
   STRC,
   NAMEBASE,
-  PERSISTENCE
+  PERSISTENCE,
+  ROLE
 };
 
 

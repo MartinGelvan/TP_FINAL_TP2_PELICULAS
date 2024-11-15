@@ -3,7 +3,12 @@ import UsersRoute from "./routes/users.route.js";
 import PeliculasRoute from "./routes/peliculas.route.js";
 import express from "express"
 import MongoConnection from "./models/MogoConnection.js"
+import generator from "./utils/userGenerator.js"
 
+
+const data = generator.randomUser()
+
+console.log("Dato Random: ", data)
 
 const app = express()
 const PORT = 8080
