@@ -1,6 +1,7 @@
 import MongoConnection from "../MogoConnection.js"
 import { MongoClient, ObjectId } from "mongodb";
 
+
 class UserMongoModel{
     constructor(){ 
     }
