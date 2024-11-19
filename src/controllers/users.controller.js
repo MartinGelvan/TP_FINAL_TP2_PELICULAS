@@ -16,8 +16,9 @@ class UsersController {
   registerUser = async (req, res) => {
     try {
         const data = req.body;
-        const newUser = await this.usersServices.registerUser(data);
+        const newUser=await this.usersServices.registerUser(data);
         res.status(201).json(newUser);
+        
     } catch (error) {
         res.status(400).json({ message: error.message });
     }

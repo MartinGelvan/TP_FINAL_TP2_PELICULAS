@@ -15,11 +15,11 @@ class PeliculasController {
     try {
         const data = req.body;
         const newPelicula = await this.peliculasServices.registerPeliculas(data);
-        res.status(201).json(newPelicula);
+        res.status(200).json(newPelicula);
     } catch (error) {
         res.status(400).json({ message: error.message });
     }
-}
+  }
 
 
   updateAllPeliculas = async (req,res) => {

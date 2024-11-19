@@ -6,9 +6,6 @@ import MongoConnection from "./models/MogoConnection.js"
 import generator from "./utils/userGenerator.js"
 
 
-const data = generator.randomUser()
-
-console.log("Dato Random: ", data)
 
 const app = express()
 const PORT = 8080

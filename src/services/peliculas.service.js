@@ -27,7 +27,7 @@ class PeliculasServices {
       });
 
       // Mapeo de los campos
-      const peliculas = response.data.results.map(pelicula => ({
+      const peliculasAPI = response.data.results.map(pelicula => ({
         id: pelicula.id,
         title: pelicula.title,
         description: pelicula.overview || 'Descripción no disponible', // Verificar existencia de descripción
@@ -35,7 +35,11 @@ class PeliculasServices {
         createdAt: new Date(),
       }));
 
-      return peliculas;  
+      const peliculasBD = await this.peliculasFactory.getPeliculas();
+      const peliculasAPINoEnBD = peliculasAPI.filter(apiPelicula => !peliculasBD.some(dbPelicula => dbPelicula.id === apiPelicula.id) ); // Combinar las películas de la base de datos y las películas filtradas de la API 
+      const peliculasTotales = [...peliculasBD, ...peliculasAPINoEnBD];
+
+      return peliculasBD;  
     } catch (error) {
       console.error('Error al obtener las películas desde TMDb:', error);
       throw new Error('Error al obtener las películas desde TMDb');
@@ -63,9 +67,11 @@ class PeliculasServices {
     }
   };
 
-  registerPeliculas = async () => {
+  registerPeliculas = async (data) => {
     const peliculas = await this.getPeliculas();
     await this.guardarPeliculasAPIEnBD(peliculas);
+    const newPelicula=await this.peliculasFactory.registerPeliculas(data)
+    return newPelicula;
   };
 
   updateAllPeliculas = async (id, data) => {
